@@ -31,10 +31,14 @@ class _HomeViewState extends State<HomeView> {
       body: Stack(
         children: <Widget>[
           // Camera View
-          CameraView(resultsCallback, statsCallback),
+          Positioned.fill(
+            child: CameraView(resultsCallback, statsCallback),
+          ),
 
           // Bounding boxes
-          boundingBoxes(results),
+          Positioned.fill(
+            child: boundingBoxes(results),
+          ),
 
           // Heading
           Align(
