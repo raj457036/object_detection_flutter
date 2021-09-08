@@ -25,6 +25,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = Size(240, 320);
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.black,
@@ -32,12 +33,21 @@ class _HomeViewState extends State<HomeView> {
         children: <Widget>[
           // Camera View
           Positioned.fill(
-            child: CameraView(resultsCallback, statsCallback),
+            child: Center(
+              child: SizedBox.fromSize(
+                  size: size,
+                  child: CameraView(size, resultsCallback, statsCallback)),
+            ),
           ),
 
           // Bounding boxes
           Positioned.fill(
-            child: boundingBoxes(results),
+            child: Center(
+              child: SizedBox.fromSize(
+                size: size,
+                child: boundingBoxes(results),
+              ),
+            ),
           ),
 
           // Heading
@@ -111,12 +121,17 @@ class _HomeViewState extends State<HomeView> {
     if (results == null) {
       return Container();
     }
-    return Stack(
-      children: results
-          .map((e) => BoxWidget(
-                result: e,
-              ))
-          .toList(),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.red, width: 2),
+      ),
+      child: Stack(
+        children: results
+            .map((e) => BoxWidget(
+                  result: e,
+                ))
+            .toList(),
+      ),
     );
   }
 
